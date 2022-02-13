@@ -8,18 +8,22 @@ public class Student implements Comparable<Student> {
     private final String lastName;
     private final String PID;
 
-    public Student(String firstName, String lastName, String PID) {}
+    public Student(String firstName, String lastName, String PID) {
+        if (firstName == null || lastName == null || PID == null) {
+            throw new NullPointerException();
+        }
+    }
 
     public String getLastName() {
-        return null;
+        return this.lastName;
     }
 
     public String getFirstName() {
-        return null;
+        return firstName;
     }
 
     public String getPID() {
-        return null;
+        return PID;
     }
 
     @Override
