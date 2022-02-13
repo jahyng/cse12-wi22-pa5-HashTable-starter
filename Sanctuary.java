@@ -10,10 +10,19 @@ public class Sanctuary {
     int maxAnimals;
     int maxSpecies;
 
-    public Sanctuary(int maxAnimals, int maxSpecies) {}
+    public Sanctuary(int maxAnimals, int maxSpecies) {
+        if (maxAnimals < 0 || maxSpecies < 0) {
+            throw new IllegalArgumentException();
+        }
+        this.maxAnimals = maxAnimals;
+        this.maxSpecies = maxSpecies;
+    }
 
     public int getNum(String species) {
-        return 0;
+        if (species == null) {
+            throw new IllegalArgumentException();
+        }
+        
     }
     
     public int getTotalAnimals() {

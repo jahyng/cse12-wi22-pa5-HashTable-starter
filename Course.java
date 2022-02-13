@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
+import javax.xml.parsers.DocumentBuilder;
+
 public class Course {
     HashSet<Student> enrolled;
     private final int capacity;
@@ -13,26 +15,39 @@ public class Course {
     private final String description;
 
     public Course(String department, String number, String description, 
-        int capacity){}
+        int capacity){
+            if (department == null || number == null || description == null) {
+                throw new NullPointerException();
+            }
+            if (capacity < 0) {
+                throw new IllegalArgumentException();
+            }
+            this.department = department;
+            this.number = number;
+            this.description = description;
+        }
 
     public String getDepartment(){
-        return null;
+        return this.department;
     }
 
     public String getNumber(){
-        return null;
+        return this.number;
     }
 
     public String getDescription(){
-        return null;
+        return this.description;
     }
 
     public int getCapacity(){
-        return 0;
+        return this.capacity;
     }
 
     public boolean enroll(Student student) {
-        return false;
+        if (student == null) {
+            throw new NullPointerException();
+        }
+        if (this.enrolled.size() < this.capacity)
     }
 
     public boolean unenroll(Student student) {
@@ -58,7 +73,11 @@ public class Course {
     }
 
     public ArrayList<Student> getRoster() {
-        return null;
+        ArrayList rosterList = new ArrayList<Student>();
+        for (int i = 0; i < this.number; i++) {
+            rosterList[i] = this[i];
+        } 
+        return rosterList;
     }
 
     public String toString() {
