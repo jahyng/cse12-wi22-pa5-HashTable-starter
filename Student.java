@@ -55,9 +55,14 @@ public class Student implements Comparable<Student> {
         if (o == null || o.getClass() != this.getClass()) {
             return false;
         }
+
+        // type cast o to Student object
         Student test = (Student) o;
+
         // check if the instance vars are the same
-            return test.getLastName() == this.getLastName() && test.getFirstName() == this.getFirstName() && test.getPID() == this.getPID();
+        return test.getLastName() == this.getLastName() 
+            && test.getFirstName() == this.getFirstName() 
+            && test.getPID() == this.getPID();
            
         
       
@@ -66,7 +71,7 @@ public class Student implements Comparable<Student> {
 
     @Override
     public int hashCode() {
-        return (int) hash(this.firstName, this.lastName, this.PID);
+        return Objects.hash(this.firstName,this.lastName,this.PID);
     }
 
     @Override
@@ -74,6 +79,7 @@ public class Student implements Comparable<Student> {
         if (o.getFirstName() == this.firstName && o.getLastName() == this.lastName && o.getPID() == this.PID) {
             return 0;
         }
-        else if (o.hashCode() )
+        return 0;
+        // else if (o.hashCode() )
     }
 }
