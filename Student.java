@@ -52,7 +52,7 @@ public class Student implements Comparable<Student> {
     @Override
     public boolean equals(Object o) {
         // check if o is null
-        if (o == null || o.getClass() != this.getClass()) {
+        if (o == null) {
             return false;
         }
 
@@ -60,9 +60,9 @@ public class Student implements Comparable<Student> {
         Student test = (Student) o;
 
         // check if the instance vars are the same
-        return test.getLastName() == this.getLastName() 
-            && test.getFirstName() == this.getFirstName() 
-            && test.getPID() == this.getPID();
+        return test.getLastName().equals(this.getLastName())
+            && test.getFirstName().equals(this.getFirstName()) 
+            && test.getPID().equals(this.getPID());
            
         
       
@@ -76,10 +76,15 @@ public class Student implements Comparable<Student> {
 
     @Override
     public int compareTo(Student o) {
-        if (o.getFirstName() == this.firstName && o.getLastName() == this.lastName && o.getPID() == this.PID) {
-            return 0;
+        if (o.getLastName().compareTo(this.lastName) == 0) {
+            if (o.getFirstName().compareTo(this.firstName) == 0) {
+                if (o.getPID().compareTo(this.PID) == 0) {
+                    return 0;
+                }
+                else return o.getPID().compareTo(this.PID);
+            }
+            else return o.getFirstName().compareTo(this.firstName);
         }
-        return 0;
-        // else if (o.hashCode() )
+        else return o.getLastName().compareTo(this.lastName);
     }
 }

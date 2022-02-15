@@ -22,23 +22,41 @@ public class Course {
             if (capacity < 0) {
                 throw new IllegalArgumentException();
             }
+            this.enrolled = new HashSet<Student>(0);
             this.department = department;
             this.number = number;
             this.description = description;
+            this.capacity = capacity;
         }
 
+    /**
+     * fetch department name
+     * @return department member variable
+     */
     public String getDepartment(){
         return this.department;
     }
 
+    /**
+     * fetch course number
+     * @return number member variable
+     */
     public String getNumber(){
         return this.number;
     }
 
+    /**
+     * fetch desciption of course
+     * @return description member variable
+     */
     public String getDescription(){
         return this.description;
     }
 
+    /**
+     * fetch capacity of course
+     * @return capacity member variable
+     */
     public int getCapacity(){
         return this.capacity;
     }
@@ -47,41 +65,60 @@ public class Course {
         if (student == null) {
             throw new NullPointerException();
         }
-        if (this.enrolled.size() < this.capacity)
+        if (!this.isFull() && !this.enrolled.contains(student)) {
+            this.enrolled.add(student);
+            return true;
+        }
+        else return false;
     }
 
     public boolean unenroll(Student student) {
-        return false;
+        if (student == null) {
+            throw new NullPointerException();
+        }
+        if (this.enrolled.contains(student)) {
+            this.enrolled.remove(student);
+            return true;
+        }
+        else return false;
     }
 
-    public void cancel() {}
+    public void cancel() {
+        this.enrolled.clear();
+    }
 
     public boolean isFull() {
-        return false;
+        return this.getAvailableSeats() == 0;
     }
 
     public int getEnrolledCount() {
-        return 0;
+        return this.enrolled.size();
     }
 
     public int getAvailableSeats() {
-        return 0;
+        return this.capacity - this.enrolled.size();
     }
 
     public HashSet<Student> getStudents() {
-        return null;
+        return (HashSet<Student>) this.enrolled.clone();
     }
 
     public ArrayList<Student> getRoster() {
         ArrayList rosterList = new ArrayList<Student>();
-        for (int i = 0; i < this.number; i++) {
-            rosterList[i] = this[i];
-        } 
+        int count = 0;
+        if (this.enrolled.iterator().hasNext()) {
+            Student nextIter = this.enrolled.iterator().next();
+            rosterList.add(count,nextIter);
+            count++;
+        }
+       
         return rosterList;
     }
 
     public String toString() {
-        return null;
+        String result = String.format("%s %s [%s]\n%s", this.department, 
+            this.number, this.capacity, this.description);
+        return result;
     }
 }
 
