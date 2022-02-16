@@ -48,19 +48,39 @@ public class Sanctuary {
         if (num <= 0 || species == null) {
             throw new IllegalArgumentException();
         }
-        if (this.getTotalAnimals() < this.maxAnimals && this.getTotalSpecies() < this.maxSpecies) {
+
+        // instance var to help 
+        int emptySpots = this.maxAnimals - this.getTotalAnimals();
+        // adding species that's already there
+        if (this.sanctuary.containsKey(species)) {
+            if (this.getTotalAnimals()  + num <= this.maxAnimals) {
+                this.sanctuary.replace(species, this.sanctuary.get(species) + num);
+                return 0;
+            }
+            else {
+                this.sanctuary.replace(species, this.sanctuary.get(species) + emptySpots);
+                return num - emptySpots;
+            }
+        }
+
+        // adding new species
+        else if (this.getTotalAnimals() < this.maxAnimals && this.getTotalSpecies() < this.maxSpecies) {
             if (this.getTotalAnimals() + num > this.maxAnimals) {
-                this.sanctuary.put(species, this.maxAnimals - this.getTotalAnimals());
-                return num - (this.maxAnimals - this.getTotalAnimals());
+                this.sanctuary.put(species, emptySpots);
+                return num - emptySpots;
             }
             this.sanctuary.put(species, num);
-        }
-        return 0;
+            return 0;
+        } else return 0;
     }
 
     public void release(String species, int num) {
-        if (num <= 0 || num > this.getNum(species) || species == null || 
-            this.getNum(species) == 0) {
+        if (!this.sanctuary.containsKey(species) || num <= 0 || 
+            num > this.getNum(species) || species == null) {
+            throw new IllegalArgumentException();
+        }
+
+        if (this.getTotalAnimals() == 0) {
             throw new IllegalArgumentException();
         }
         

@@ -100,16 +100,15 @@ public class Course {
     }
 
     public HashSet<Student> getStudents() {
-        return (HashSet<Student>) this.enrolled.clone();
+        return this.enrolled;
     }
 
     public ArrayList<Student> getRoster() {
-        ArrayList rosterList = new ArrayList<Student>();
-        int count = 0;
-        if (this.enrolled.iterator().hasNext()) {
+        ArrayList<Student> rosterList = new ArrayList<Student>();
+        //Iterator iter = this.enrolled.iterator();
+        while (this.enrolled.iterator().hasNext()) {
             Student nextIter = this.enrolled.iterator().next();
-            rosterList.add(count,nextIter);
-            count++;
+            rosterList.add(nextIter);
         }
        
         return rosterList;
