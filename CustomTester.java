@@ -1,25 +1,18 @@
 /**
- * TODO: Add your file header
- * Name:
- * ID:
- * Email:
- * Sources used: Put "None" if you did not have any external help
- * Some example of sources used would be Tutors, Zybooks, and Lecture Slides
- * 
- * 2-4 sentence file description here
+ * Name: Josh Yang
+ * ID: A16667394
+ * Email: jwyang@ucsd.ued
+ * Sources used: None
+ * Tester for methods that public tester did not test. 
  */
 
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-
-import javax.swing.ScrollPaneConstants;
-import javax.swing.text.html.HTMLDocument.RunElement;
-
 import static org.junit.Assert.*;
 import org.junit.*;
 
 /**
- * TODO: Add your class header
+ * This class tests methods that public test file did not. Public tester did not 
+ * test exceptions, so this class does. 
  * 
  * IMPORTANT: Do not change the method names and points are awarded
  * only if your test cases cover cases that the public tester file
@@ -54,8 +47,8 @@ public class CustomTester {
             new String("Student"), new String("A122"));
 
         assertEquals(0, student1.compareTo(student2));
-        assertEquals(-1, student1.compareTo(student3));
-        assertEquals(1, student3.compareTo(student1));
+        assertEquals(1, student1.compareTo(student3));
+        assertEquals(-1, student3.compareTo(student1));
     }
 
     // ----------------Course class----------------
@@ -137,11 +130,12 @@ public class CustomTester {
         course.enrolled.add(test2);
         course.enrolled.add(test3);
 
-        ArrayList<Student> list = course.getRoster();
-        for (int i = 0; i < 3; i ++) {
-            System.out.println(list.get(i).getFirstName());
-        }
-        assertEquals(3, list.size());
+        ArrayList <Student> list = course.getRoster();
+
+        assertEquals(3, course.getRoster().size());
+        assertEquals(test2, list.get(0));
+        assertEquals(test, list.get(1));
+        assertEquals(test3, list.get(2));
     
     }
 

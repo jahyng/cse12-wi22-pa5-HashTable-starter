@@ -1,8 +1,17 @@
 /**
- * TODO: Complete the solution for Student
+ * Josh Yang
+ * A16667394
+ * jwyang@ucsd.edu
+ * I used the links provided in the PA writeup for the implementation of 
+ * hashCode and compareTo methods. 
  */
 import java.util.Objects;
 
+/**
+ * This class creates student for the course. It overrides hashCode and 
+ * compareTo methods. There are three String instance variables firstName, 
+ * lastName, and PID.
+ */
 public class Student implements Comparable<Student> {
     private final String firstName;
     private final String lastName;
@@ -69,22 +78,36 @@ public class Student implements Comparable<Student> {
 
     }
 
+    /**
+     * gives hashcode for the student object
+     * @return student hashcode
+     */
     @Override
     public int hashCode() {
         return Objects.hash(this.firstName,this.lastName,this.PID);
     }
 
+    /**
+     * compares the student's instance variables
+     * @param o student object used to compare
+     * @return positive int if current student is lexicographically after param.
+     * negative int if current student is lexicographically before param
+     * 0 if students are the same
+     */
     @Override
     public int compareTo(Student o) {
-        if (o.getLastName().compareTo(this.lastName) == 0) {
-            if (o.getFirstName().compareTo(this.firstName) == 0) {
-                if (o.getPID().compareTo(this.PID) == 0) {
+        // check last name first
+        if (this.getLastName().compareTo(o.lastName) == 0) {
+            // chekc first name next
+            if (this.getFirstName().compareTo(o.firstName) == 0) {
+                // check PID next
+                if (this.getPID().compareTo(o.PID) == 0) {
                     return 0;
                 }
-                else return o.getPID().compareTo(this.PID);
+                else return this.getPID().compareTo(o.PID);
             }
-            else return o.getFirstName().compareTo(this.firstName);
+            else return this.getFirstName().compareTo(o.firstName);
         }
-        else return o.getLastName().compareTo(this.lastName);
+        else return this.getLastName().compareTo(o.lastName);
     }
 }
